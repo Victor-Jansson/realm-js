@@ -405,7 +405,6 @@ jobs:
       LONG_TIMEOUT: 300000 # 5 minutes
       MOCHA_REMOTE_REPORTER: mocha-github-actions-reporter
       MOCHA_REMOTE_EXIT_ON_ERROR: true
-      SPAWN_LOGCAT: true
       BAAS_BRANCH: master
       # Pin the Xcode version
       DEVELOPER_DIR: /Applications/Xcode_14.3.1.app
@@ -621,6 +620,7 @@ jobs:
       - name: Run ${{matrix.variant.target}} (${{ matrix.variant.os}} / ${{ matrix.variant.environment }})
         if: ${{ matrix.variant.os == 'android' }}
         env:
+          SPAWN_LOGCAT: true
           MOCHA_REMOTE_CONTEXT: ${{ steps.mocha-env.outputs.context }}
           # TODO: Consider passing ORG_GRADLE_PROJECT_reactNativeArchitectures=x86 to limit increase build speed
         timeout-minutes: 75
